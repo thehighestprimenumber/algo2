@@ -1,5 +1,7 @@
 # **TP BATCH**
 
+[diagramas](https://www.lucidchart.com/invitations/accept/be08420c-9d4f-4ae0-8f63-8df0abfdd625)
+
 ## Enunciado
 
 Se debe desarrollar un programa genérico que tenga la capacidad de incorporar aplicaciones cuyo procesamiento será delegado en diversos comandos *batch*.
