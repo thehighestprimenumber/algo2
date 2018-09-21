@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import batcheador.Parameter;
 import core.Ibatcheable;
 
-public class BatchControl {
+public abstract class BatchControl {
 
 	protected JLabel label;
 	protected Field field;
