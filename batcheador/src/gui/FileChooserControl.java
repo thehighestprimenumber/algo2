@@ -17,7 +17,7 @@ public class FileChooserControl extends BatchControl{
 	public FileChooserControl(Field f, Ibatcheable b) {
 		super(f,b);
 		
-		button = new JButton("Open");
+		button = new JButton("Select file");
 		button.addActionListener(new ActionListener() {
 			JFileChooser input;
 		    public void actionPerformed(ActionEvent e) {
