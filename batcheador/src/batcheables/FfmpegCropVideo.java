@@ -13,13 +13,13 @@ public class FfmpegCropVideo implements Ibatcheable {
 	@Parameter(flag = "-ss", label = "inputStart", control = "gui.TextControl", optional = false)
 	private LocalTime start;
 	
-	@Parameter(flag = "-i", label = "inputVideo", control = "gui.TextControl", optional = false)
+	@Parameter(flag = "-i", label = "inputVideo", control = "gui.FileChooserControl", optional = false)
 	private String inputVideo;
 
 	@Parameter(flag = "-t", label = "inputDuration", control = "gui.TextControl", optional = false)
 	private LocalTime duration;
 
-	@Parameter(flag = "-c", label = "destination", control = "gui.TextControl", optional = false)
+	@Parameter(flag = "-c", label = "destination", control = "gui.FileChooserControl", optional = false)
 	private String outputVideo;
 	
 }

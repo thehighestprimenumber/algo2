@@ -17,8 +17,6 @@ public class SpinnerControl extends BatchControl{
 	SpinnerListModel optionsModel;
 	public SpinnerControl(Field f, Ibatcheable b) {
 		super(f,b);
-		options.add("a");
-		options.add("b"); // TODO add real options
 		optionsModel = new SpinnerListModel(options);
 		this.input = new JSpinner(optionsModel);
 		input.setMinimumSize(input.getPreferredSize());

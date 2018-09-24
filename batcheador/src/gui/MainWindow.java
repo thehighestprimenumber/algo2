@@ -1,48 +1,61 @@
 package gui;
 
-import java.lang.reflect.Field;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
+import javax.swing.SwingConstants;
 
 import batcheador.Batcheable;
-import batcheador.Parameter;
 import core.Ibatcheable;
 
 public class MainWindow {
-
-	List<Field> fields = new ArrayList<Field>();
-	Ibatcheable batcheable;
+	List<Ibatcheable> batcheables = new ArrayList<Ibatcheable>();
 	JFrame frame;
 	JPanel panel;
+	JLabel textLabel;
+	JSpinner spinner;
+	JButton button;
+	SpinnerListModel spinnerModel;
+	String[] options;
 
-	public MainWindow(Ibatcheable batcheable) {
-		this.batcheable = batcheable;
+	public MainWindow(List<Ibatcheable> batcheables) {
+		this.batcheables = batcheables;
 
-		frame = new JFrame(batcheable.getClass().getAnnotation(Batcheable.class).name());
+		frame = new JFrame("Batcheador");
 		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-
-		for (Field field : batcheable.getClass().getDeclaredFields()) {
-			if (field.isAnnotationPresent(Parameter.class))
-				fields.add(field);
-			BatchControl component;
-			try {
-				Class<?> clazz = Class.forName(field.getAnnotation(Parameter.class).control());
-				component = (BatchControl) clazz.getConstructor(Field.class, Ibatcheable.class).newInstance(field,
-						batcheable);
-				frame.add(component.getPanel());
-			} catch (Exception ex) {
-				ex.printStackTrace(); // TODO
-			}
-
-		}
-		frame.add(new ExecuteButton());
+		
+		options = obtenerNombresBatcheables(batcheables);
+		textLabel = new JLabel("Seleccione una aplicación", SwingConstants.CENTER);
+		spinnerModel = new SpinnerListModel(options);
+		spinner = new JSpinner(spinnerModel);
+		button = new JButton("Aceptar");
+		
+		button.addActionListener(new ActionListener() { 
+	          public void actionPerformed(ActionEvent e) {
+	            new BatcheableWindow(batcheables.stream().filter(app -> app.getClass().getAnnotation(Batcheable.class).name().equals(spinner.getValue())).findFirst().get());
+	          }
+	    }); 
+		
+		frame.add(textLabel);
+		frame.add(spinner);
+		frame.add(button);
 		frame.pack();
 		frame.setVisible(true);
 
+	}
+	
+	public String[] obtenerNombresBatcheables(List<Ibatcheable> batcheables){
+		return batcheables.stream().map(app -> app.getClass().getAnnotation(Batcheable.class).name()).toArray(String[]::new);
 	}
 
 }
