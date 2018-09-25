@@ -12,9 +12,9 @@ import core.Ibatcheable;
 public class FfmpegMuteVideo implements Ibatcheable {
 
 	@Parameter(flag = "-i", label = "inputVideo", control = "gui.TextControl", optional = false)
-	private String inputVideo;
+	public String inputVideo;
 
 	@Parameter(flag = "-af", label = "inputAudio", control = "gui.TextControl", optional = false)
-	private List<String> sections;
+	public List<String> sections;
 	
 }
