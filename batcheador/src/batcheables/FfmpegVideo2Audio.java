@@ -7,14 +7,14 @@ import core.Ibatcheable;
 @Batcheable(name = "ffmpegVideo2Audio")
 public class FfmpegVideo2Audio implements Ibatcheable {
 
-	@Parameter(flag = "-i", label = "inputVideo", control = "gui.FileChooserControl", optional = false)
-	private String inputVideo;
+	@Parameter(flag = "-i", label = "Video Input", control = "gui.FileChooserControl", optional = false)
+	public String inputVideo;
 
-	@Parameter(flag = "-i", label = "inputAudio", control = "gui.TextControl", optional = false)
-	private String inputAudio;
+	@Parameter(flag = "-i", label = "Audio Input", control = "gui.TextControl", optional = false)
+	public String inputAudio;
 
-	@Parameter(flag = "-o", label = "output", control = "gui.TextControl", optional = false)
-	private String output;
+	@Parameter(flag = "-o", label = "Output file", control = "gui.TextControl", optional = false)
+	public String output;
 	
 }
 

@@ -7,27 +7,31 @@ import java.lang.reflect.Field;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileSystemView;
 
 import core.Ibatcheable;
 
 public class FileChooserControl extends BatchControl{
-	JFileChooser input;
-	JButton button;
+	private JFileChooser input;
+	private JButton button;
+	private JLabel fileLabel;
 	public FileChooserControl(Field f, Ibatcheable b) {
 		super(f,b);
 		
 		button = new JButton("Select file");
+		fileLabel = new JLabel("Select file");
+		panel.add(fileLabel);
+		JFileChooser input = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		button.addActionListener(new ActionListener() {
-			JFileChooser input;
+
 		    public void actionPerformed(ActionEvent e) {
-				this.input = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());		
-				
 				int returnValue = input.showOpenDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					if (input.getSelectedFile().isFile()) {
 						try {
-							field.set(b, input.getSelectedFile());
+							field.set(b, input.getSelectedFile().getAbsolutePath());
+							fileLabel.setText(input.getSelectedFile().getAbsolutePath());
 						} catch (IllegalArgumentException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

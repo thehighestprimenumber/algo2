@@ -8,7 +8,7 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class ExecuteButton extends JButton {
 	ExecuteButton(){
-		super("Ejecutar");
+		super("Run");
 		addActionListener(new ExecuteButtonListener());
 	}
 }
@@ -18,6 +18,5 @@ public class ExecuteButton extends JButton {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO validar y ejecutar comando
-		
 	}
 }
