@@ -7,7 +7,7 @@ import batcheador.Parameter;
 import core.Ibatcheable;
 
 //ffmpeg -ss <start> -i <SrcFile> -t <duration> -c copy <DstFile>
-@Batcheable(name = "ffmpegCropVideo")
+@Batcheable(name = "ffmpegCropVideo", command = "ffmpeg")
 public class FfmpegCropVideo implements Ibatcheable {
 
 	@Parameter(flag = "-ss", label = "inputStart", control = "gui.TextControl", optional = false)

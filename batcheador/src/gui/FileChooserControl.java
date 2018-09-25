@@ -21,7 +21,7 @@ public class FileChooserControl extends BatchControl{
 		
 		button = new JButton("Select file");
 		fileLabel = new JLabel("Select file");
-		panel.add(fileLabel);
+		
 		JFileChooser input = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		button.addActionListener(new ActionListener() {
 
@@ -32,10 +32,7 @@ public class FileChooserControl extends BatchControl{
 						try {
 							field.set(b, input.getSelectedFile().getAbsolutePath());
 							fileLabel.setText(input.getSelectedFile().getAbsolutePath());
-						} catch (IllegalArgumentException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IllegalAccessException e1) {
+						} catch (IllegalArgumentException | IllegalAccessException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -45,6 +42,7 @@ public class FileChooserControl extends BatchControl{
 		});
 		
 		panel.add(button);
+		panel.add(fileLabel);
 		
 	}
 

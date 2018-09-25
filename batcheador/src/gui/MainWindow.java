@@ -10,10 +10,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.ListModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import batcheador.Batcheable;
 import core.Ibatcheable;
@@ -23,31 +27,39 @@ public class MainWindow {
 	JFrame frame;
 	JPanel panel;
 	JLabel textLabel;
-	JSpinner spinner;
+	JList<String> list;
 	JButton button;
-	SpinnerListModel spinnerModel;
 	String[] options;
 
 	public MainWindow(List<Ibatcheable> batcheables) {
 		this.batcheables = batcheables;
 
 		frame = new JFrame("Batcheador");
-		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
+		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		button = new JButton("Aceptar");
+		button.setEnabled(false);
 		
 		options = obtenerNombresBatcheables(batcheables);
-		textLabel = new JLabel("Seleccione una aplicación", SwingConstants.CENTER);
-		spinnerModel = new SpinnerListModel(options);
-		spinner = new JSpinner(spinnerModel);
-		button = new JButton("Aceptar");
+		textLabel = new JLabel("Seleccione una aplicación");
+		list = new JList<String>(options);
+		list.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				button.setEnabled(true);
+				
+			}
+		});
 		
 		button.addActionListener(new ActionListener() { 
 	          public void actionPerformed(ActionEvent e) {
-	            new BatcheableWindow(batcheables.stream().filter(app -> app.getClass().getAnnotation(Batcheable.class).name().equals(spinner.getValue())).findFirst().get());
+	            new BatcheableWindow(batcheables.stream().filter(app -> app.getClass().getAnnotation(Batcheable.class).name().equals(list.getSelectedValue())).findFirst().get());
+	           
 	          }
 	    }); 
 		
 		frame.add(textLabel);
-		frame.add(spinner);
+		frame.add(list);
 		frame.add(button);
 		frame.pack();
 		frame.setVisible(true);

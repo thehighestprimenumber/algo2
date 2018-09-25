@@ -8,7 +8,7 @@ import core.Ibatcheable;
 
 // ffmpeg -i video.mp4 -af "volume=enable='between(t,5,10)':volume=0, volume=enable='between(t,15,20)':volume=0" ...
 
-@Batcheable(name = "ffmpegVideo2Audio")
+@Batcheable(name = "FfmpegMuteVideo", command = "ffmpeg")
 public class FfmpegMuteVideo implements Ibatcheable {
 
 	@Parameter(flag = "-i", label = "inputVideo", control = "gui.TextControl", optional = false)
