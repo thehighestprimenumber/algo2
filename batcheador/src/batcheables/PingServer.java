@@ -8,5 +8,5 @@ import core.Ibatcheable;
 public class PingServer implements Ibatcheable {
 
     @Parameter(label = "server", control = "gui.TextControl", optional = false)
-    public String server;
+    public String server = "www.google.com";
 }

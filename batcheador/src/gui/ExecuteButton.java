@@ -47,9 +47,7 @@ public class ExecuteButton extends JButton {
                     ex.printStackTrace();
                 }
             });
-            String result = CommandExecuter.execute(output.toString());
-            //TODO: Desplegar resultado de una maneja mas elegante
-            System.out.println(result);
+            CommandExecuter.execute(output.toString());
         });
 	}
 

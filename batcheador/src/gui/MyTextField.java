@@ -15,7 +15,6 @@ class MyTextField extends JTextField{
 			try {
 				setText((String) f.get(b));
 				setFont(getFont().deriveFont(Font.ITALIC));
-				
 			} catch (IllegalArgumentException | IllegalAccessException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();

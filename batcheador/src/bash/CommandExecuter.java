@@ -1,32 +1,21 @@
 package bash;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class CommandExecuter {
 
-    public static String execute(String command) {
-
-        StringBuilder output = new StringBuilder();
+    public static void execute(String command) {
 
         Process p;
         try {
+        	if (System.getProperty("os.name").equalsIgnoreCase("Windows"))
+    			command = "cmd /c start cmd.exe "+command;
+    	else 
+    		command= "/usr/bin/x-terminal-emulator --disable-factory -e "+ command;
             p = Runtime.getRuntime().exec(command);
-            p.waitFor();
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(p.getInputStream(), "CP850"));
-
-            String line;
-            while ((line = reader.readLine())!= null) {
-                output.append(line);
-                output.append("\n");
-            }
-
+//            p.waitFor();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return output.toString();
 
     }
 }
