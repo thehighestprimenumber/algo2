@@ -41,6 +41,7 @@ public class BatcheableWindow {
 		}
 		frame.add(new ExecuteButton(batcheable, fields));
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 	}

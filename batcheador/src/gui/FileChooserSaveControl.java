@@ -3,32 +3,38 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.reflect.Field;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import core.Ibatcheable;
 
-public class FileChooserControl extends BatchControl{
+public class FileChooserSaveControl extends BatchControl{
 	private JFileChooser input;
 	private JButton button;
 	private JLabel fileLabel;
-	public FileChooserControl(Field f, Ibatcheable b) {
+	public FileChooserSaveControl(Field f, Ibatcheable b) {
 		super(f,b);
 		
-		button = new JButton("Select file");
+		button = new JButton("Save");
 		fileLabel = new JLabel("Select file");
-		
-		JFileChooser input = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		input = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		input.setDialogTitle("Specify a file to save");
+		input.addChoosableFileFilter(new FileNameExtensionFilter("Video file", "mpg", "mov", "wmv", "rm", "mp4", "webm", "avi"));
+		input.setAcceptAllFileFilterUsed(false);
+
 		button.addActionListener(new ActionListener() {
 
 		    public void actionPerformed(ActionEvent e) {
-				int returnValue = input.showOpenDialog(null);
+				int returnValue = input.showSaveDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
-					if (input.getSelectedFile().isFile()) {
+				    File file = input.getSelectedFile();
+					if (file != null) {
 						try {
 							field.set(b, input.getSelectedFile().getAbsolutePath());
 							fileLabel.setText(input.getSelectedFile().getAbsolutePath());

@@ -62,6 +62,7 @@ public class MainWindow {
 		frame.add(list);
 		frame.add(button);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 	}
