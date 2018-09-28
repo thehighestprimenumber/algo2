@@ -10,16 +10,16 @@ import core.Ibatcheable;
 @Batcheable(name = "ffmpegCropVideo", command = "ffmpeg")
 public class FfmpegCropVideo implements Ibatcheable {
 
-	@Parameter(flag = "-ss", label = "inputStart", control = "gui.TextControl", optional = false)
+	@Parameter(flag = "-ss", label = "Start time", control = "gui.TextControl", optional = false)
 	public LocalTime start;
 	
-	@Parameter(flag = "-i", label = "inputVideo", control = "gui.FileChooserOpenControl", optional = false)
+	@Parameter(flag = "-i", label = "Video Imput", control = "gui.FileChooserOpenControl", optional = false)
 	public String inputVideo;
 
-	@Parameter(flag = "-t", label = "inputDuration", control = "gui.TextControl", optional = false)
+	@Parameter(flag = "-t", label = "Video duration", control = "gui.TextControl", optional = false)
 	public LocalTime duration;
 
-	@Parameter(flag = "-c", label = "destination", control = "gui.FileChooserSaveControl", optional = false)
+	@Parameter(flag = "-c", label = "Output file", control = "gui.FileChooserSaveControl", optional = false)
 	public String outputVideo;
 	
 }

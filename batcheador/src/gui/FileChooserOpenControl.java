@@ -50,6 +50,7 @@ public class FileChooserOpenControl extends BatchControl{
 		panel.add(button);
 		panel.add(fileLabel);
 		
+		
 	}
 
 	public JFileChooser getInput() {

@@ -38,10 +38,16 @@ public class MainWindow {
 		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		button = new JButton("Aceptar");
 		button.setEnabled(false);
+	    button.setAlignmentX(JButton.CENTER_ALIGNMENT);
+
 		
 		options = obtenerNombresBatcheables(batcheables);
-		textLabel = new JLabel("Seleccione una aplicación");
+		textLabel = new JLabel("Seleccione una aplicación", SwingConstants.CENTER );
+	    textLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+	    
 		list = new JList<String>(options);
+	    list.setAlignmentX(JList.CENTER_ALIGNMENT);
+
 		list.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -61,7 +67,8 @@ public class MainWindow {
 		frame.add(textLabel);
 		frame.add(list);
 		frame.add(button);
-		frame.pack();
+		//frame.pack();
+		frame.setSize(250, 150);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
