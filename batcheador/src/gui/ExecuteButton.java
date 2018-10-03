@@ -5,10 +5,13 @@ import batcheador.Batcheable;
 import batcheador.Parameter;
 import core.Ibatcheable;
 
+import java.awt.*;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class ExecuteButton extends JButton {
@@ -20,6 +23,7 @@ public class ExecuteButton extends JButton {
 		this.fields = fields;
 		this.origin = origin;
 		addActionListener(e -> {
+			List<Field> emptyNonOptional = new ArrayList<>();
             StringBuilder output = new StringBuilder();
 
             output.append(getOrigin().getClass().getAnnotation(Batcheable.class).command());
@@ -39,18 +43,40 @@ public class ExecuteButton extends JButton {
                         output.append(o.toString());
 
                     }else if(!field.getAnnotation(Parameter.class).optional()){
-                        System.out.println("Shit happends bro!");
-                        //TODO: Manejar error
+                        System.out.println("LOG: el parametro " + field.getName() + " es obligatorio y no fue rellenado");
+	                    emptyNonOptional.add(field);
                     }
                 }catch (IllegalAccessException ex){
                     //No deberia entrar nunca
                     ex.printStackTrace();
                 }
             });
-            String result = CommandExecuter.execute(output.toString());
-            //TODO: Desplegar resultado de una maneja mas elegante
-            System.out.println(result);
+
+            if(emptyNonOptional.isEmpty()) {
+	            String result = CommandExecuter.execute(output.toString());
+	            this.openResultWindow("Resultado", result);
+            }else {
+				this.openResultWindow("Error", "Hay campos obligatorios que no han sido rellenados");
+            }
+
         });
+	}
+
+	private void openResultWindow(String title, String text){
+		//TODO: hacerlo mas bonito
+		JFrame frame = new JFrame(title);
+
+		JTextField texto = new JTextField();
+		texto.setPreferredSize(new Dimension(100, 200));
+		texto.setText(text);
+		texto.setEditable(false);
+		texto.setAlignmentX(JTextField.CENTER_ALIGNMENT);
+
+		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.add(texto);
+		frame.setSize(300, 200);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 
 	private List<Field> getFields(){

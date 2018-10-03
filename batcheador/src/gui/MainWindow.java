@@ -68,7 +68,7 @@ public class MainWindow {
 		frame.add(list);
 		frame.add(button);
 		//frame.pack();
-		frame.setSize(250, 150);
+		frame.setSize(250, 170);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
