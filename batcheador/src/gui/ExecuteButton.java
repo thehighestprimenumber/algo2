@@ -53,8 +53,8 @@ public class ExecuteButton extends JButton {
             });
 
             if(emptyNonOptional.isEmpty()) {
-	            String result = CommandExecuter.execute(output.toString());
-	            this.openResultWindow("Resultado", result);
+	            if(!CommandExecuter.execute(output.toString()))
+		            this.openResultWindow("Error", "Ocurrio un error durante la ejecucion del comando");
             }else {
 				this.openResultWindow("Error", "Hay campos obligatorios que no han sido rellenados");
             }
@@ -67,14 +67,13 @@ public class ExecuteButton extends JButton {
 		JFrame frame = new JFrame(title);
 
 		JTextField texto = new JTextField();
-		texto.setPreferredSize(new Dimension(100, 200));
 		texto.setText(text);
 		texto.setEditable(false);
 		texto.setAlignmentX(JTextField.CENTER_ALIGNMENT);
 
 		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.add(texto);
-		frame.setSize(300, 200);
+		frame.setSize(350, 200);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
