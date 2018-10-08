@@ -1,12 +1,10 @@
 package batcheables;
 
-import java.util.List;
-
 import batcheador.Batcheable;
 import batcheador.Parameter;
 import core.Ibatcheable;
 
-// ffmpeg -i video.mp4 -af "volume=enable='between(t,5,10)':volume=0, volume=enable='between(t,15,20)':volume=0" ...
+// ffmpeg -i example.mkv -c copy -an example-nosound.mkv
 
 @Batcheable(name = "FfmpegMuteVideo", command = "ffmpeg")
 public class FfmpegMuteVideo implements Ibatcheable {
@@ -14,7 +12,10 @@ public class FfmpegMuteVideo implements Ibatcheable {
 	@Parameter(flag = "-i", label = "inputVideo", control = "gui.TextControl", optional = false)
 	public String inputVideo;
 
-	@Parameter(flag = "-af", label = "inputAudio", control = "gui.TextControl", optional = false)
-	public List<String> sections;
+	@Parameter(flag = "-c")
+	public String copy = "copy";
+
+	@Parameter(flag = "-an", label = "outputVideo", control = "gui.TextControl", optional = false)
+	public String outputVideo;
 	
 }

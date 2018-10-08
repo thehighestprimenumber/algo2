@@ -1,8 +1,5 @@
 package bash;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class CommandExecuter {
 
     public static Boolean execute(String command) {
@@ -26,7 +23,7 @@ public class CommandExecuter {
 //            e.printStackTrace();
 //        }
 	    try{
-		    Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"" + command + "\"");
+		    Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"echo " + command + " && " + command + "\"");
 	    }catch (Exception e){
 	    	return false;
 	    }

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Parameter{
     String flag() default "";
-    String label();
-    String control();
+    String label() default "";
+    String control() default "";
     boolean optional() default true;
 }

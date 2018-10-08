@@ -29,15 +29,17 @@ public class BatcheableWindow {
 			if (field.isAnnotationPresent(Parameter.class))
 				fields.add(field);
 			BatchControl component;
-			try {
-				Class<?> clazz = Class.forName(field.getAnnotation(Parameter.class).control());
-				component = (BatchControl) clazz.getConstructor(Field.class, Ibatcheable.class).newInstance(field,
-						batcheable);
-				frame.add(component.getPanel());
-			} catch (Exception ex) {
-				ex.printStackTrace(); // TODO
+			String controllerClass = field.getAnnotation(Parameter.class).control();
+			if(!controllerClass.isEmpty()){
+				try {
+					Class<?> clazz = Class.forName(controllerClass);
+					component = (BatchControl) clazz.getConstructor(Field.class, Ibatcheable.class).newInstance(field,
+							batcheable);
+					frame.add(component.getPanel());
+				} catch (Exception ex) {
+					ex.printStackTrace(); // TODO
+				}
 			}
-
 		}
 		frame.add(new ExecuteButton(batcheable, fields));
 		frame.pack();
