@@ -5,6 +5,7 @@ import batcheador.Batcheable;
 import batcheador.Parameter;
 import core.Ibatcheable;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +47,17 @@ public class ExecuteButton extends JButton {
                 }catch (IllegalAccessException ex){
                     //No deberia entrar nunca
                     ex.printStackTrace();
+                    this.openResultWindow("Error", "Error de ejecución");
                 }
             });
 
             if(emptyNonOptional.isEmpty()) {
-	            if(!CommandExecuter.execute(output.toString()))
+	            try {
+	            	CommandExecuter.execute(output.toString());	
+	            } catch (IOException ioe) {
+	            	ioe.printStackTrace();
 		            this.openResultWindow("Error", "Ocurrio un error durante la ejecucion del comando");
+	            }
             }else {
 				this.openResultWindow("Error", "Hay campos obligatorios que no han sido rellenados");
             }

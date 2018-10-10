@@ -1,34 +1,23 @@
 package bash;
 
+import java.io.IOException;
+
 public class CommandExecuter {
 
-    public static Boolean execute(String command) {
+	public static void execute(String command) throws IOException {
 
-        StringBuilder output = new StringBuilder();
+		String os = System.getProperty("os.name");
 
-//        Process p;
-//        try {
-//            p = Runtime.getRuntime().exec(command);
-//            p.waitFor();
-//            BufferedReader reader =
-//                    new BufferedReader(new InputStreamReader(p.getInputStream(), "CP850"));
-//
-//            String line;
-//            while ((line = reader.readLine())!= null) {
-//                output.append(line);
-//                output.append("\n");
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-	    try{
-		    Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"echo " + command + " && " + command + "\"");
-	    }catch (Exception e){
-	    	return false;
-	    }
-
-        return true;
-
-    }
+		if (os.equalsIgnoreCase("Windows"))
+			command = "cmd /c start cmd.exe /K \"echo " + command + " && " + command + "\"";
+		else if (os.equalsIgnoreCase("linux"))
+ 			command = "/usr/bin/x-terminal-emulator --disable-factory -e " + command;
+		
+		try {
+			Runtime.getRuntime().exec(command);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			throw e1;
+		}
+	}
 }

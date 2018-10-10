@@ -37,6 +37,7 @@ public class BatcheableWindow {
 							batcheable);
 					frame.add(component.getPanel());
 				} catch (Exception ex) {
+					
 					ex.printStackTrace(); // TODO
 				}
 			}
