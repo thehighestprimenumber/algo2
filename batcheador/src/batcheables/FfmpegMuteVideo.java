@@ -9,7 +9,7 @@ import core.Ibatcheable;
 @Batcheable(name = "ffmpeg - Mute Video", command = "ffmpeg")
 public class FfmpegMuteVideo implements Ibatcheable {
 
-	@Parameter(flag = "-i", label = "inputVideo", control = "gui.FileChooserOpenControl", optional = false)
+	@Parameter(flag = "-i", label = "inputVideo", control = "gui.FileChooserOpenControlVideo", optional = false)
 	public String inputVideo;
 
 	@Parameter(flag = "-c")

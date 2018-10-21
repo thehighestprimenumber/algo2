@@ -14,9 +14,9 @@ import javax.swing.filechooser.FileSystemView;
 import core.Ibatcheable;
 
 public class FileChooserOpenControl extends BatchControl{
-	private JFileChooser input;
-	private JButton button;
-	private JLabel fileLabel;
+	protected JFileChooser input;
+	protected JButton button;
+	protected JLabel fileLabel;
 	public FileChooserOpenControl(Field f, Ibatcheable b) {
 		super(f,b);
 		
@@ -24,10 +24,6 @@ public class FileChooserOpenControl extends BatchControl{
 		fileLabel = new JLabel("Select file");
 		input = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		input.setDialogTitle("Specify a file to open");
-		input.addChoosableFileFilter(new FileNameExtensionFilter("Image file", "jpg", "jpeg", "png", "gif", "bmp", "tif"));
-		input.addChoosableFileFilter(new FileNameExtensionFilter("Video file", "mpg", "mov", "wmv", "rm", "mp4", "webm", "avi"));
-		input.addChoosableFileFilter(new FileNameExtensionFilter("Audio file", "wav", "aif", "mp3", "mid"));
-		input.setAcceptAllFileFilterUsed(false);
 
 		button.addActionListener(new ActionListener() {
 
