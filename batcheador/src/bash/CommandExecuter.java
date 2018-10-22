@@ -12,7 +12,8 @@ public class CommandExecuter {
 			command = "cmd /c start cmd.exe /K \"echo " + command + " && " + command + "\"";
 		else if (os.equalsIgnoreCase("linux"))
  			command = "/usr/bin/x-terminal-emulator --disable-factory -e " + command;
-		
+		else if (os.equalsIgnoreCase("mac"))
+			//command = "/bin/bash -c " + command; // todavia no funca
 		try {
 			Runtime.getRuntime().exec(command);
 		} catch (IOException e1) {
