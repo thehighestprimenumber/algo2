@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -14,11 +13,11 @@ import javax.swing.filechooser.FileSystemView;
 
 import core.Ibatcheable;
 
-public class FileChooserSaveControl extends BatchControl{
+public class FileChooserSaveControlVideo extends BatchControl{
 	private JFileChooser input;
 	private JButton button;
 	private JLabel fileLabel;
-	public FileChooserSaveControl(Field f, Ibatcheable b) {
+	public FileChooserSaveControlVideo(Field f, Ibatcheable b) {
 		super(f,b);
 		
 		button = new JButton("Save");
@@ -36,8 +35,12 @@ public class FileChooserSaveControl extends BatchControl{
 				    File file = input.getSelectedFile();
 					if (file != null) {
 						try {
-							field.set(b, input.getSelectedFile().getAbsolutePath());
-							fileLabel.setText(input.getSelectedFile().getAbsolutePath());
+							// Agrego extension por default
+							if (getFileExtension(file) == ""){
+								 file = new File(file.toString() + ".mp4");  // append .mp4 	
+							} 
+							field.set(b, file.getAbsolutePath());
+							fileLabel.setText(file.getAbsolutePath());
 						} catch (IllegalArgumentException | IllegalAccessException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -59,5 +62,12 @@ public class FileChooserSaveControl extends BatchControl{
 	public void setInput(JFileChooser input) {
 		this.input = input;
 	}
+	
+	private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+        return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
+    }
 
 }

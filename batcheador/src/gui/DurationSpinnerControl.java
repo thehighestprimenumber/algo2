@@ -1,9 +1,11 @@
 package gui;
 
+import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -19,6 +21,9 @@ public class DurationSpinnerControl extends BatchControl{
 	SpinnerNumberModel modelHours;
 	SpinnerNumberModel modelMinutes;
 	SpinnerNumberModel modelSeconds;
+	JLabel textHs;
+	JLabel textMin;
+	JLabel textSec;
 	
 	public DurationSpinnerControl(Field f, Ibatcheable b) {
 		super(f,b);
@@ -34,6 +39,10 @@ public class DurationSpinnerControl extends BatchControl{
 		inputHours.setMinimumSize(inputHours.getPreferredSize());
 		inputMinutes.setMinimumSize(inputMinutes.getPreferredSize());
 		inputSeconds.setMinimumSize(inputSeconds.getPreferredSize());
+		
+		textHs = new JLabel("hs");
+		textMin = new JLabel("min");
+		textSec = new JLabel("sec");
 		
 		inputHours.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -68,8 +77,11 @@ public class DurationSpinnerControl extends BatchControl{
 			}
 		});
 		panel.add(inputHours);
+		panel.add(textHs);
 		panel.add(inputMinutes);
+		panel.add(textMin);
 		panel.add(inputSeconds);
+		panel.add(textSec);
 
 	}
 

@@ -20,7 +20,7 @@ public class FfmpegCropVideo implements Ibatcheable {
 	@Parameter(flag = "-c", optional = false)
 	public String copy = "copy";
 	
-	@Parameter(flag = "", label = "Output file", control = "gui.FileChooserSaveControl", optional = false)
+	@Parameter(flag = "", label = "Output file", control = "gui.FileChooserSaveControlVideo", optional = false)
 	public String outputVideo;
 	
 }

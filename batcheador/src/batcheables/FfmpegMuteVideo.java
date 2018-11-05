@@ -15,7 +15,7 @@ public class FfmpegMuteVideo implements Ibatcheable {
 	@Parameter(flag = "-c")
 	public String copy = "copy";
 
-	@Parameter(flag = "-an", label = "outputVideo", control = "gui.FileChooserSaveControl", optional = false)
+	@Parameter(flag = "-an", label = "outputVideo", control = "gui.FileChooserSaveControlVideo", optional = false)
 	public String outputVideo;
 	
 }

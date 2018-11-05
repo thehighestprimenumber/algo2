@@ -15,7 +15,7 @@ public class FfmpegVideo2Audio implements Ibatcheable {
 	@Parameter(flag = "-c:a", label = "Audio Codec", control = "gui.TextControl", optional = true)
 	public String audioCodec = "copy";
 
-	@Parameter(flag = "", label = "Output file", control = "gui.FileChooserSaveControl", optional = false)
+	@Parameter(flag = "", label = "Output file", control = "gui.FileChooserSaveControlVideo", optional = false)
 	public String output = "*.mpg";
 	
 }

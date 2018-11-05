@@ -13,7 +13,8 @@ public class CommandExecuter {
 		else if (os.equalsIgnoreCase("linux"))
  			command = "/usr/bin/x-terminal-emulator --disable-factory -e " + command;
 		else if (os.equalsIgnoreCase("mac"))
-			//command = "/bin/bash -c " + command; // todavia no funca
+			//command = "/bin/bash " + command; // todavia no funca
+			//System.out.println(command);
 		try {
 			Runtime.getRuntime().exec(command);
 		} catch (IOException e1) {
