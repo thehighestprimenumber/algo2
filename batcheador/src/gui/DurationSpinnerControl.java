@@ -1,10 +1,8 @@
 package gui;
 
-import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
