@@ -5,6 +5,7 @@ import java.util.List;
 
 import batcheables.FfmpegCropVideo;
 import batcheables.FfmpegMuteVideo;
+import batcheables.FfmpegRotateVideo;
 import batcheables.FfmpegVideo2Audio;
 import batcheables.PingServer;
 import gui.MainWindow;
@@ -16,6 +17,7 @@ public class Main {
 		aplicaciones.add(new FfmpegVideo2Audio());
 		aplicaciones.add(new FfmpegCropVideo());
 		aplicaciones.add(new FfmpegMuteVideo());
+		aplicaciones.add(new FfmpegRotateVideo());
         aplicaciones.add(new PingServer());
 		new MainWindow(aplicaciones);
 	}

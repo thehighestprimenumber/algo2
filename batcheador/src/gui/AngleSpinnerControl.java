@@ -11,12 +11,6 @@ import javax.swing.event.ChangeListener;
 
 import core.Ibatcheable;
 
-/*-vf "transpose = 0" = 90CounterCLockwise and Vertical Flip (default)
--vf "transpose = 1" = 90Clockwise
--vf "transpose = 2" = 90CounterClockwise
--vf "transpose = 3" = 90Clockwise and Vertical Flip
--vf "transpose = 2, transpose = 2, " = 180Flip*/
-
 public class AngleSpinnerControl extends BatchControl{
 	JSpinner inputAngle;
 	List<String> options = new ArrayList<String>();
@@ -26,7 +20,7 @@ public class AngleSpinnerControl extends BatchControl{
 	public AngleSpinnerControl(Field f, Ibatcheable b) {
 		super(f,b);
 		
-		modelAngle = new SpinnerNumberModel(0,0,360,90); 
+		modelAngle = new SpinnerNumberModel(0,0,360,1); 
 		this.inputAngle = new JSpinner(modelAngle);
 
 		inputAngle.setMinimumSize(inputAngle.getPreferredSize());
@@ -51,15 +45,10 @@ public class AngleSpinnerControl extends BatchControl{
 	}
 
 	public String getValueInputs() {
-//		switch (inputAngle.getValue()) {
-//				rem 0 = 90CounterCLockwise and Vertical Flip (default)
-//				rem 1 = 90Clockwise
-//				rem 2 = 90CounterClockwise
-//				rem 3 = 90Clockwise and Vertical Flip
-//		}
-		
-		
-		return inputAngle.getValue().toString();
+		String output = String.format("\"rotate=%s*PI/180",inputAngle.getValue().toString());
+		if (((int) inputAngle.getValue())%90==0) output +=  ":bilinear=0";
+		output+=", format = yuv420p\"";
+		return output;
 	}
 
 	public void setHoursInput(JSpinner input) {
